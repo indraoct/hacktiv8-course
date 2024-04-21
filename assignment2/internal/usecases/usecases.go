@@ -15,6 +15,8 @@ type Usecases struct {
 
 type UsecaseImpl interface {
 	CreateOrder(ctx context.Context, orders entities.Orders) (message string, httpCode int, err error)
+	UpdateOrder(ctx context.Context, orders entities.Orders) (message string, httpCode int, err error)
+	GetAllOrderAndItem(ctx context.Context) (orders []entities.Orders, message string, httpCode int, err error)
 }
 
 func NewUsecase(opt options.Options, repo repositories.RepositoryImpl) UsecaseImpl {
