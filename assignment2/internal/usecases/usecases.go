@@ -5,6 +5,7 @@ import (
 	"hacktiv8-course/assignment2/commons/options"
 	"hacktiv8-course/assignment2/internal/entities"
 	"hacktiv8-course/assignment2/internal/repositories"
+	"log"
 	"net/http"
 )
 
@@ -53,7 +54,7 @@ func (u Usecases) CreateOrder(ctx context.Context, orders entities.Orders) (mess
 
 func (u Usecases) GetAllOrderAndItem(ctx context.Context) (orders []entities.Orders, message string, httpCode int, err error) {
 
-	httpCode = http.StatusCreated
+	httpCode = http.StatusOK
 	message = "Success!"
 
 	defer func() {
@@ -64,6 +65,7 @@ func (u Usecases) GetAllOrderAndItem(ctx context.Context) (orders []entities.Ord
 	}()
 
 	orders, err = u.repo.GetAllOrders(ctx)
+	log.Println("orders", orders)
 	return
 }
 

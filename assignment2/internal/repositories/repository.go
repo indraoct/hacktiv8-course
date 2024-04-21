@@ -86,11 +86,11 @@ func (r Repository) UpdateOrderAndItem(ctx context.Context, order entities.Order
 	r.DbGorm.Begin()
 	order.UpdatedAt = time.Now()
 
-	if err = r.DbGorm.Save(&order).Error; err != nil {
+	if err = r.DbGorm.Where("order_id = ?", order.OrderId).Updates(&order).Error; err != nil {
 		return
 	}
 
-	if err = r.DbGorm.Save(&items).Error; err != nil {
+	if err = r.DbGorm.Where("item_id = ?", items.ItemId).Updates(&items).Error; err != nil {
 		return
 	}
 
@@ -109,11 +109,11 @@ func (r Repository) DeleteOrderAndItem(ctx context.Context, order entities.Order
 	}()
 
 	r.DbGorm.Begin()
-	if err = r.DbGorm.Delete(&order).Error; err != nil {
+	if err = r.DbGorm.Where("order_id = ?", order.OrderId).Delete(&order).Error; err != nil {
 		return
 	}
 
-	if err = r.DbGorm.Delete(&items).Error; err != nil {
+	if err = r.DbGorm.Where("item_id = ?", items.ItemId).Delete(&items).Error; err != nil {
 		return
 	}
 	return

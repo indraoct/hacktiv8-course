@@ -38,6 +38,7 @@ func StartServer() {
 
 	//routing
 	http.HandleFunc("GET /ping", handler.Ping)
+	http.HandleFunc("GET /get_all", handler.GetAllData)
 
 	//start server
 	err = http.ListenAndServe(":"+port, nil)
