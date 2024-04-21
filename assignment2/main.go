@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	appName := "Assignment 2 - Hactiv8"
+	appName := "Assignment 2 - Hacktiv8"
 	goVersion := runtime.Version()
 	osArch := fmt.Sprintf("%s %s", runtime.GOOS, runtime.GOARCH)
 

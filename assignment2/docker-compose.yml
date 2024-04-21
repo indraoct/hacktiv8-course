@@ -6,8 +6,8 @@ services:
       - "8090:8090"
     environment:
       HACKTIV_APP_NAME: Assignment2
-      HACKTIV_DATABASE_URL: host=localhost user=indra password=pass1234 dbname=hacktiv port=5432 sslmode=disable
-      HACKTIV_AUTH: ThisIsSecret12345
+      HACKTIV_DATABASE_STRING: host=db user=indra password=pass1234 dbname=hacktiv port=5432 sslmode=disable
+      HACKTIV_PORT: 8090
     depends_on:
       db:
         condition: service_healthy
