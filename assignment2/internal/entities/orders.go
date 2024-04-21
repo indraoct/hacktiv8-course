@@ -1,6 +1,8 @@
 package entities
 
-import "time"
+import (
+	"time"
+)
 
 type Orders struct {
 	OrderId      uint      `gorm:"primaryKey" json:"order_id"`
@@ -8,5 +10,5 @@ type Orders struct {
 	OrderedAt    time.Time `gorm:"type:timestamp" json:"ordered_at"`
 	CreatedAt    time.Time `gorm:"type:timestamp" json:"created_at"`
 	UpdatedAt    time.Time `gorm:"type:timestamp" json:"updated_at"`
-	Items        []Items   `gorm:"foreignKey:ItemRefer" json:"items"`
+	Items        []Items   `gorm:"foreignKey:OrderId;constraint:OnUpdate:CASCADE,OnDelete:SET NULL;" json:"items"`
 }

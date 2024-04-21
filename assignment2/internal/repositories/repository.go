@@ -57,17 +57,10 @@ func (r Repository) GetAllOrders(ctx context.Context) (respData []entities.Order
 		reqData entities.Orders
 	)
 
-	rows, err := r.DbGorm.Model(&reqData).Rows()
+	err = r.DbGorm.Model(&reqData).Preload("Items").Find(&respData).Error
 	if err != nil {
 		return
 	}
-
-	for rows.Next() {
-		var order entities.Orders
-		r.DbGorm.ScanRows(rows, &order)
-		respData = append(respData, order)
-	}
-
 	return
 }
 
