@@ -4,6 +4,7 @@ import (
 	"context"
 	"hacktiv8-course/assignment2/commons/options"
 	"hacktiv8-course/assignment2/internal/entities"
+	"time"
 )
 
 type Repository struct {
@@ -36,6 +37,10 @@ func (r Repository) CreateOrderAndItem(ctx context.Context, reqOrder entities.Or
 		r.DbGorm.Commit()
 
 	}()
+
+	reqOrder.OrderedAt = time.Now()
+	reqOrder.CreatedAt = time.Now()
+	reqOrder.OrderedAt = time.Now()
 
 	err = r.DbGorm.Create(&reqOrder).Error
 	if err != nil {
@@ -70,7 +75,7 @@ func (r Repository) UpdateOrderAndItem(ctx context.Context, order entities.Order
 
 	defer func() {
 		//if there is error then rollback
-		if err == nil {
+		if err != nil {
 			r.DbGorm.Rollback()
 			return
 		}
@@ -79,6 +84,8 @@ func (r Repository) UpdateOrderAndItem(ctx context.Context, order entities.Order
 	}()
 
 	r.DbGorm.Begin()
+	order.UpdatedAt = time.Now()
+
 	if err = r.DbGorm.Save(&order).Error; err != nil {
 		return
 	}
@@ -93,7 +100,7 @@ func (r Repository) UpdateOrderAndItem(ctx context.Context, order entities.Order
 func (r Repository) DeleteOrderAndItem(ctx context.Context, order entities.Orders, items entities.Items) (err error) {
 	defer func() {
 		//if there is error then rollback
-		if err == nil {
+		if err != nil {
 			r.DbGorm.Rollback()
 			return
 		}
