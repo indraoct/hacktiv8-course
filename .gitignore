@@ -21,3 +21,4 @@
 go.work
 .idea
 assignment2/vendor
+.DS_Store
