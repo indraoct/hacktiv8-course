@@ -14,8 +14,9 @@ type Repository struct {
 type RepositoryImpl interface {
 	CreateOrderAndItem(ctx context.Context, reqOrder entities.Orders, reqItem entities.Items) error
 	GetAllOrders(ctx context.Context) (respData []entities.Orders, err error)
-	UpdateOrderAndItem(ctx context.Context, order entities.Orders, items entities.Items) (err error)
-	DeleteOrderAndItem(ctx context.Context, order entities.Orders, items entities.Items) (err error)
+	GetOrderById(ctx context.Context, id uint) (respData entities.Orders, err error)
+	UpdateOrderAndItem(ctx context.Context, reqOrder entities.Orders) (err error)
+	DeleteOrderAndItem(ctx context.Context, reqOrder entities.Orders) (err error)
 }
 
 func NewRepositories(opt options.Options) RepositoryImpl {
@@ -24,30 +25,22 @@ func NewRepositories(opt options.Options) RepositoryImpl {
 
 func (r Repository) CreateOrderAndItem(ctx context.Context, reqOrder entities.Orders, reqItem entities.Items) (err error) {
 
-	//start transaction
-	r.DbGorm.Begin()
-
-	defer func() {
-		//if there is error then rollback
-		if err == nil {
-			r.DbGorm.Rollback()
-			return
-		}
-		//if everything is ok then will be transaction commit
-		r.DbGorm.Commit()
-
-	}()
-
+	var items []entities.Items
 	reqOrder.OrderedAt = time.Now()
 	reqOrder.CreatedAt = time.Now()
 	reqOrder.OrderedAt = time.Now()
+
+	for _, item := range reqOrder.Items {
+		item.CreatedAt = time.Now()
+		items = append(items, item)
+	}
+	reqOrder.Items = items
 
 	err = r.DbGorm.Create(&reqOrder).Error
 	if err != nil {
 		return
 	}
 
-	err = r.DbGorm.Create(&reqItem).Error
 	return
 }
 
@@ -64,50 +57,53 @@ func (r Repository) GetAllOrders(ctx context.Context) (respData []entities.Order
 	return
 }
 
-func (r Repository) UpdateOrderAndItem(ctx context.Context, order entities.Orders, items entities.Items) (err error) {
+func (r Repository) GetOrderById(ctx context.Context, id uint) (respData entities.Orders, err error) {
 
-	defer func() {
-		//if there is error then rollback
-		if err != nil {
-			r.DbGorm.Rollback()
-			return
-		}
-		//if everything is ok then will be transaction commit
-		r.DbGorm.Commit()
-	}()
+	var (
+		reqData entities.Orders
+	)
 
-	r.DbGorm.Begin()
-	order.UpdatedAt = time.Now()
+	err = r.DbGorm.Model(&reqData).Preload("Items").First(&respData, "order_id=?", id).Error
+	if err != nil {
+		return
+	}
+	return
+}
 
-	if err = r.DbGorm.Where("order_id = ?", order.OrderId).Updates(&order).Error; err != nil {
+func (r Repository) UpdateOrderAndItem(ctx context.Context, reqOrder entities.Orders) (err error) {
+
+	//update order
+	err = r.DbGorm.Save(&reqOrder).Error
+	if err != nil {
 		return
 	}
 
-	if err = r.DbGorm.Where("item_id = ?", items.ItemId).Updates(&items).Error; err != nil {
-		return
+	//update items
+	for _, item := range reqOrder.Items {
+		if err = r.DbGorm.Save(&item).Error; err != nil {
+			return
+		}
 	}
 
 	return
 }
 
-func (r Repository) DeleteOrderAndItem(ctx context.Context, order entities.Orders, items entities.Items) (err error) {
-	defer func() {
-		//if there is error then rollback
+func (r Repository) DeleteOrderAndItem(ctx context.Context, reqOrder entities.Orders) (err error) {
+
+	//delete all item
+	orders, _ := r.GetOrderById(ctx, reqOrder.OrderId)
+	for _, item := range orders.Items {
+		err = r.DbGorm.Delete(&item).Error
 		if err != nil {
-			r.DbGorm.Rollback()
 			return
 		}
-		//if everything is ok then will be transaction commit
-		r.DbGorm.Commit()
-	}()
+	}
 
-	r.DbGorm.Begin()
-	if err = r.DbGorm.Where("order_id = ?", order.OrderId).Delete(&order).Error; err != nil {
+	//delete order
+	err = r.DbGorm.Delete(&reqOrder).Error
+	if err != nil {
 		return
 	}
 
-	if err = r.DbGorm.Where("item_id = ?", items.ItemId).Delete(&items).Error; err != nil {
-		return
-	}
 	return
 }

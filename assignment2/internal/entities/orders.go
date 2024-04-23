@@ -5,10 +5,10 @@ import (
 )
 
 type Orders struct {
-	OrderId      uint      `gorm:"primaryKey" json:"order_id"`
-	CustomerName string    `gorm:"not null; unique; type:varchar(70)" json:"customer_name"`
-	OrderedAt    time.Time `gorm:"type:timestamp" json:"ordered_at"`
-	CreatedAt    time.Time `gorm:"type:timestamp" json:"created_at"`
-	UpdatedAt    time.Time `gorm:"type:timestamp" json:"updated_at"`
-	Items        []Items   `gorm:"foreignKey:OrderId;constraint:OnUpdate:CASCADE,OnDelete:SET NULL;" json:"items"`
+	OrderId      uint      `gorm:"primaryKey" json:"orderId,omitempty"`
+	CustomerName string    `gorm:"not null; unique; type:varchar(70)" json:"customerName,omitempty"`
+	OrderedAt    time.Time `gorm:"type:timestamp" json:"orderAt,omitempty"`
+	CreatedAt    time.Time `gorm:"type:timestamp" json:"createdAt,omitempty"`
+	UpdatedAt    time.Time `gorm:"type:timestamp" json:"updatedAt,omitempty"`
+	Items        []Items   `gorm:"foreignKey:OrderId;constraint:OnUpdate:CASCADE,OnDelete:SET NULL;" json:"items,omitempty"`
 }

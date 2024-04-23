@@ -16,8 +16,9 @@ type Usecases struct {
 
 type UsecaseImpl interface {
 	CreateOrder(ctx context.Context, orders entities.Orders) (message string, httpCode int, err error)
-	UpdateOrder(ctx context.Context, orders entities.Orders) (message string, httpCode int, err error)
+	UpdateOrder(ctx context.Context, orders entities.Orders, id uint) (respOrders entities.Orders, message string, httpCode int, err error)
 	GetAllOrderAndItem(ctx context.Context) (orders []entities.Orders, message string, httpCode int, err error)
+	DeleteOrder(ctx context.Context, orders entities.Orders, id uint) (message string, httpCode int, err error)
 }
 
 func NewUsecase(opt options.Options, repo repositories.RepositoryImpl) UsecaseImpl {
@@ -69,14 +70,9 @@ func (u Usecases) GetAllOrderAndItem(ctx context.Context) (orders []entities.Ord
 	return
 }
 
-func (u Usecases) UpdateOrder(ctx context.Context, orders entities.Orders) (message string, httpCode int, err error) {
+func (u Usecases) UpdateOrder(ctx context.Context, orders entities.Orders, id uint) (respOrders entities.Orders, message string, httpCode int, err error) {
 
-	var (
-		reqOrder entities.Orders
-		reqItems entities.Items
-	)
-
-	httpCode = http.StatusCreated
+	httpCode = http.StatusOK
 	message = "Success!"
 
 	defer func() {
@@ -86,25 +82,19 @@ func (u Usecases) UpdateOrder(ctx context.Context, orders entities.Orders) (mess
 		}
 	}()
 
-	reqOrder = orders
-
-	for _, item := range orders.Items {
-		reqItems = item
-		break
+	orders.OrderId = id
+	err = u.repo.UpdateOrderAndItem(ctx, orders)
+	if err != nil {
+		return
 	}
 
-	err = u.repo.UpdateOrderAndItem(ctx, reqOrder, reqItems)
+	respOrders, err = u.repo.GetOrderById(ctx, id)
 	return
 }
 
-func (u Usecases) DeleteOrder(ctx context.Context, orders entities.Orders) (message string, httpCode int, err error) {
+func (u Usecases) DeleteOrder(ctx context.Context, orders entities.Orders, id uint) (message string, httpCode int, err error) {
 
-	var (
-		reqOrder entities.Orders
-		reqItems entities.Items
-	)
-
-	httpCode = http.StatusCreated
+	httpCode = http.StatusOK
 	message = "Success!"
 
 	defer func() {
@@ -114,13 +104,7 @@ func (u Usecases) DeleteOrder(ctx context.Context, orders entities.Orders) (mess
 		}
 	}()
 
-	reqOrder = orders
-
-	for _, item := range orders.Items {
-		reqItems = item
-		break
-	}
-
-	err = u.repo.UpdateOrderAndItem(ctx, reqOrder, reqItems)
+	orders.OrderId = id
+	err = u.repo.DeleteOrderAndItem(ctx, orders)
 	return
 }
