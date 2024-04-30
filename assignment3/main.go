@@ -20,7 +20,7 @@ func main() {
 	)
 
 	//ticker every 15 second
-	ticker := time.NewTicker(1 * time.Second)
+	ticker := time.NewTicker(15 * time.Second)
 
 	done := make(chan bool)
 
