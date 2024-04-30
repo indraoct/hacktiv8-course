@@ -36,22 +36,26 @@ func main() {
 
 				//water
 				switch {
+				case water > 8:
+					statusWater = "bahaya"
 				case water <= 8 && water >= 6:
 					statusWater = "siaga"
 				case water < 5:
 					statusWater = "aman"
 				default:
-					statusWater = "bahaya"
+					statusWater = "tidak terdefinisi"
 				}
 
 				//wind
 				switch {
-				case wind <= 15 && water >= 7:
+				case wind > 15:
+					statusWind = "bahaya"
+				case wind <= 15 && wind >= 7:
 					statusWind = "siaga"
-				case water < 6:
+				case wind < 6:
 					statusWind = "aman"
 				default:
-					statusWind = "bahaya"
+					statusWind = "tidak terdefinisi"
 				}
 
 				keadaan.Wind = wind
