@@ -49,9 +49,9 @@ func main() {
 				case wind <= 15 && water >= 7:
 					statusWind = "siaga"
 				case water < 6:
-					statusWind = "siaga"
+					statusWind = "aman"
 				default:
-					statusWind = "siaga"
+					statusWind = "bahaya"
 				}
 
 				keadaan.Wind = wind
