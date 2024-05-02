@@ -8,6 +8,9 @@ services:
       HACKTIV_APP_NAME: Final Assignment
       HACKTIV_DATABASE_STRING: host=db user=indra password=pass1234 dbname=mygram port=5432 sslmode=disable
       HACKTIV_PORT: 8090
+      HACKTIV_PRIVATE_KEY : ./assets/keys/private_key.pem
+      HACKTIV_PUBLIC_KEY : ./assets/keys/public_key.pem
+      HACKTIV_SECRET_KEY : sfpas
     depends_on:
       db:
         condition: service_healthy

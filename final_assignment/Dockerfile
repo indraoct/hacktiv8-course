@@ -7,7 +7,8 @@ FROM golang:1.22-alpine as Build
 COPY . .
 
 # This will make directory asset/*
-RUN mkdir -p ./assets
+RUN mkdir -p ./assets/db
+RUN mkdir -p ./assets/keys
 
 # Build our binary at root location.
 RUN GOPATH= go build -o /main main.go
@@ -18,7 +19,9 @@ FROM alpine:latest
 
 # We need to copy the binary from the build image to the production image.
 COPY --from=Build /main .
-ADD assets/database.sql ./assets/database.sql
+ADD ./assets/db/database.sql ./assets/db/database.sql
+ADD ./assets/keys/private_key.pem ./assets/keys/private_key.pem
+ADD ./assets/keys/public_key.pem ./assets/keys/public_key.pem
 
 # This is the port that our application will be listening on.
 EXPOSE 8090
