@@ -21,4 +21,5 @@
 go.work
 .idea
 assignment2/vendor
+final_assignment/vendor
 .DS_Store
