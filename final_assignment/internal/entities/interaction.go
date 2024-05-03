@@ -1,6 +1,9 @@
 package entities
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"net/http"
+)
 
 type Request struct {
 	Username string `json:"username,omitempty"`
@@ -16,7 +19,7 @@ type Response struct {
 	Data    interface{} `json:"data,omitempty"`
 }
 
-func MessageResponse(err error, httpStatus int, data interface{}) []byte {
+func MessageResponse(err error, httpStatus int, data interface{}, w http.ResponseWriter) http.ResponseWriter {
 
 	var (
 		resp     []byte
@@ -30,6 +33,9 @@ func MessageResponse(err error, httpStatus int, data interface{}) []byte {
 		response.Status = httpStatus
 	}
 	resp, _ = json.Marshal(response)
+	w.Header().Set("Content-Type", "Application/Json")
+	w.WriteHeader(httpStatus)
+	w.Write(resp)
 
-	return resp
+	return w
 }

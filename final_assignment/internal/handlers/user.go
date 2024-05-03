@@ -21,10 +21,7 @@ func (h Handler) Register(w http.ResponseWriter, req *http.Request) {
 
 	defer func() {
 		helper.RecoverPanic()
-		resp := entities.MessageResponse(err, httpStatus, "")
-		w.Header().Set("Content-Type", "Application/Json")
-		w.WriteHeader(httpStatus)
-		w.Write(resp)
+		entities.MessageResponse(err, httpStatus, "", w)
 	}()
 
 	body, err := io.ReadAll(req.Body)
