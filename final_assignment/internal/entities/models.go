@@ -4,46 +4,47 @@ import "time"
 
 // User represents the User table
 type User struct {
-	ID          uint          `gorm:"primaryKey" json:"id"`
-	Username    string        `json:"username"`
-	Title       string        `json:"title"`
-	Email       string        `json:"email"`
-	Password    string        `json:"password"`
-	Age         int           `json:"age"`
-	CreatedAt   time.Time     `json:"created_at"`
-	UpdatedAt   time.Time     `json:"updated_at"`
-	Comment     []Comment     `gorm:"foreignKey:UserID;constraint:OnUpdate:CASCADE,OnDelete:SET NULL;"`
-	Photo       []Photo       `gorm:"foreignKey:UserID;constraint:OnUpdate:CASCADE,OnDelete:SET NULL;"`
-	SocialMedia []SocialMedia `gorm:"foreignKey:UserID;constraint:OnUpdate:CASCADE,OnDelete:SET NULL;"`
+	ID          uint          `gorm:"primaryKey" json:"id,omitempty"`
+	Username    string        `json:"username,omitempty"`
+	Title       string        `json:"title,omitempty"`
+	Email       string        `gorm:"not null, unique" json:"email,omitempty"`
+	Password    string        `json:"-"`
+	Age         int           `json:"age,omitempty"`
+	CreatedAt   time.Time     `json:"created_at,omitempty"`
+	UpdatedAt   time.Time     `json:"updated_at,omitempty"`
+	Token       string        `json:"token,omitempty" gorm:"-"`
+	Comment     []Comment     `json:"comment,omitempty" gorm:"foreignKey:UserID;constraint:OnUpdate:CASCADE,OnDelete:SET NULL;"`
+	Photo       []Photo       `json:"photo,omitempty" gorm:"foreignKey:UserID;constraint:OnUpdate:CASCADE,OnDelete:SET NULL;"`
+	SocialMedia []SocialMedia `json:"socialMedia,omitempty" gorm:"foreignKey:UserID;constraint:OnUpdate:CASCADE,OnDelete:SET NULL;"`
 }
 
 // Comment represents the Comment table
 type Comment struct {
-	ID        uint      `gorm:"primaryKey" json:"id"`
-	Comment   string    `json:"comment"`
-	Message   string    `json:"message"`
-	CreatedAt time.Time `json:"created_at"`
-	UpdatedAt time.Time `json:"updated_at"`
+	ID        uint      `gorm:"primaryKey" json:"id,omitempty"`
+	Comment   string    `json:"comment,omitempty"`
+	Message   string    `json:"message,omitempty"`
+	CreatedAt time.Time `json:"created_at,omitempty"`
+	UpdatedAt time.Time `json:"updated_at,omitempty"`
 	UserID    uint
 	PhotoID   uint
 }
 
 // Photo represents the Photo table
 type Photo struct {
-	ID        uint      `gorm:"primaryKey" json:"id"`
-	Caption   string    `json:"caption"`
-	PhotoURL  string    `json:"photo_url"`
-	CreatedAt time.Time `json:"created_at"`
-	UpdatedAt time.Time `json:"updated_at"`
+	ID        uint      `gorm:"primaryKey" json:"id,omitempty"`
+	Caption   string    `json:"caption,omitempty"`
+	PhotoURL  string    `json:"photo_url,omitempty"`
+	CreatedAt time.Time `json:"created_at,omitempty"`
+	UpdatedAt time.Time `json:"updated_at,omitempty"`
 	UserID    uint
 }
 
 // SocialMedia represents the Social Media table
 type SocialMedia struct {
-	ID             uint      `gorm:"primaryKey" json:"id"`
-	Name           string    `json:"name"`
-	SocialMediaURL string    `json:"social_media_url"`
-	CreatedAt      time.Time `json:"created_at"`
-	UpdatedAt      time.Time `json:"updated_at"`
+	ID             uint      `gorm:"primaryKey" json:"id,omitempty"`
+	Name           string    `json:"name,omitempty"`
+	SocialMediaURL string    `json:"social_media_url,omitempty"`
+	CreatedAt      time.Time `json:"created_at,omitempty"`
+	UpdatedAt      time.Time `json:"updated_at,omitempty"`
 	UserID         uint
 }

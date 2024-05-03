@@ -1,5 +1,5 @@
 -- Create User table
-CREATE TABLE  "user" (
+CREATE TABLE  "users" (
     id SERIAL PRIMARY KEY,
     username VARCHAR(255) NOT NULL,
     title VARCHAR(255),
@@ -15,7 +15,7 @@ CREATE TABLE  photo (
     id SERIAL PRIMARY KEY,
     caption TEXT,
     photo_url VARCHAR(255),
-    user_id INTEGER REFERENCES "user"(id),
+    user_id INTEGER REFERENCES "users"(id),
     created_at TIMESTAMPTZ,
     updated_at TIMESTAMPTZ
     );
@@ -23,7 +23,7 @@ CREATE TABLE  photo (
 -- Create Comment table
 CREATE TABLE comment (
      id SERIAL PRIMARY KEY,
-     user_id INTEGER REFERENCES "user"(id),
+     user_id INTEGER REFERENCES "users"(id),
      comment TEXT,
      photo_id INTEGER REFERENCES photo(id),
      message TEXT,
@@ -36,13 +36,13 @@ CREATE TABLE  socialmedia (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255),
     social_media_url VARCHAR(255),
-    user_id INTEGER REFERENCES "user"(id),
+    user_id INTEGER REFERENCES "users"(id),
     created_at TIMESTAMPTZ,
     updated_at TIMESTAMPTZ
     );
 
 -- Truncate User table
-TRUNCATE TABLE "user";
+TRUNCATE TABLE "users";
 
 -- Truncate Photo table
 TRUNCATE TABLE photo;
@@ -56,7 +56,7 @@ TRUNCATE TABLE socialmedia;
 
 
 -- Insert into User table
-INSERT INTO "user" (username, title, email, password, age, created_at, updated_at) VALUES
+INSERT INTO "users" (username, title, email, password, age, created_at, updated_at) VALUES
                                                                                        ('user1', 'Title One', 'user1@example.com', 'password1', 25, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
                                                                                        ('user2', 'Title Two', 'user2@example.com', 'password2', 30, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
                                                                                        ('user3', 'Title Three', 'user3@example.com', 'password3', 35, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
