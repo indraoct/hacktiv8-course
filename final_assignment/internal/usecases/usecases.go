@@ -21,6 +21,12 @@ type UsecaseImpl interface {
 	GetPhotoById(ctx context.Context, req entities.Request) (photo *entities.Photo, httpStatus int, err error)
 	UpdatePhoto(ctx context.Context, req entities.Request) (photo *entities.Photo, httpStatus int, err error)
 	DeletePhoto(ctx context.Context, req entities.Request) (httpStatus int, err error)
+
+	CreateComment(ctx context.Context, req entities.Request) (httpStatus int, err error)
+	GetAllComment(ctx context.Context) (comments *[]entities.Comment, httpStatus int, err error)
+	GetCommentById(ctx context.Context, req entities.Request) (comment *entities.Comment, httpStatus int, err error)
+	UpdateComment(ctx context.Context, req entities.Request) (comment *entities.Comment, httpStatus int, err error)
+	DeleteComment(ctx context.Context, req entities.Request) (httpStatus int, err error)
 }
 
 func NewUsecase(opt options.Options, repo repositories.RepositoryImpl) UsecaseImpl {

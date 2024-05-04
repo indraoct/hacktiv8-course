@@ -21,7 +21,6 @@ type User struct {
 // Comment represents the Comment table
 type Comment struct {
 	ID        uint      `gorm:"primaryKey" json:"id,omitempty"`
-	Comment   string    `json:"comment,omitempty"`
 	Message   string    `json:"message,omitempty"`
 	CreatedAt time.Time `json:"created_at,omitempty"`
 	UpdatedAt time.Time `json:"updated_at,omitempty"`

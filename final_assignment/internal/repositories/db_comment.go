@@ -51,3 +51,21 @@ func (r Repository) DeleteComment(ctx context.Context, id uint) error {
 	}
 	return nil
 }
+
+func (r Repository) GetCommentByUserID(ctx context.Context, userId uint) (*[]entities.Comment, error) {
+	var comments []entities.Comment
+	result := r.DbGorm.Find(&comments, "user_id=?", userId)
+	if result.Error != nil {
+		return nil, result.Error
+	}
+	return &comments, nil
+}
+
+func (r Repository) GetCommentByIDByUserId(ctx context.Context, userId, id uint) (*entities.Comment, error) {
+	var comment entities.Comment
+	result := r.DbGorm.First(&comment, "user_id=? AND id=?", userId, id)
+	if result.Error != nil {
+		return nil, result.Error
+	}
+	return &comment, nil
+}

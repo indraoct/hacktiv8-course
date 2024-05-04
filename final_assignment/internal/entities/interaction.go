@@ -14,6 +14,8 @@ type Request struct {
 	PhotoId    uint   `json:"photoId"`
 	PhotoTitle string `json:"photoTitle,omitempty"`
 	PhotoUrl   string `json:"photoUrl,omitempty"`
+	CommentId  uint   `json:"commentId"`
+	Message    string `json:"message,omitempty"`
 }
 
 type Response struct {

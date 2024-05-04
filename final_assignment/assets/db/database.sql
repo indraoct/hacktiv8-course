@@ -24,7 +24,6 @@ CREATE TABLE  photos (
 CREATE TABLE comments (
      id SERIAL PRIMARY KEY,
      user_id INTEGER REFERENCES "users"(id),
-     comment TEXT,
      photo_id INTEGER REFERENCES photos(id),
      message TEXT,
      created_at TIMESTAMPTZ,
@@ -60,12 +59,12 @@ INSERT INTO photos (caption, photo_url, user_id, created_at, updated_at) VALUES
                                                                             ('Caption 5', 'photo_url_5.jpg', 5, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
 -- Insert into Comment table
-INSERT INTO comments (user_id, comment, photo_id, message, created_at, updated_at) VALUES
-                                                                                      (1, 'Comment 1', 1, 'Message 1', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-                                                                                      (2, 'Comment 2', 2, 'Message 2', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-                                                                                      (3, 'Comment 3', 3, 'Message 3', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-                                                                                      (4, 'Comment 4', 4, 'Message 4', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-                                                                                      (5, 'Comment 5', 5, 'Message 5', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+INSERT INTO comments (user_id, photo_id, message, created_at, updated_at) VALUES
+                                                                                      (1,  1, 'Message 1', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+                                                                                      (2,  2, 'Message 2', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+                                                                                      (3,  3, 'Message 3', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+                                                                                      (4,  4, 'Message 4', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+                                                                                      (5,  5, 'Message 5', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
 -- Insert into Social Media table
 INSERT INTO socialmedias (name, social_media_url, user_id, created_at, updated_at) VALUES

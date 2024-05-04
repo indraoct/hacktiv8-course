@@ -30,6 +30,8 @@ type RepositoryImpl interface {
 	GetCommentByID(ctx context.Context, id uint) (*entities.Comment, error)
 	UpdateComment(ctx context.Context, comment *entities.Comment) error
 	GetAllComments(ctx context.Context) ([]entities.Comment, error)
+	GetCommentByUserID(ctx context.Context, userId uint) (*[]entities.Comment, error)
+	GetCommentByIDByUserId(ctx context.Context, userId, id uint) (*entities.Comment, error)
 	DeleteComment(ctx context.Context, id uint) error
 
 	CreateSocialMedia(ctx context.Context, entry *entities.SocialMedia) error
