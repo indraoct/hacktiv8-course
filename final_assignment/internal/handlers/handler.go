@@ -1,6 +1,8 @@
 package handlers
 
 import (
+	"encoding/json"
+	"hacktiv8-course/final_assignment/cmd/middleware"
 	"hacktiv8-course/final_assignment/commons/options"
 	"hacktiv8-course/final_assignment/internal/usecases"
 	"net/http"
@@ -25,14 +27,11 @@ func (h Handler) Ping(w http.ResponseWriter, req *http.Request) {
 
 func (h Handler) Pong(w http.ResponseWriter, req *http.Request) {
 
-	// Get the value from context set by middleware
-	value := req.Context().Value("kunci").(string)
-	value2 := req.Context().Value("konco").(string)
-
+	// Get the user login from context set by middleware
+	user := middleware.GetAuth(req.Context())
+	b, _ := json.Marshal(user)
 	// Use the value
-	w.Write([]byte("Value from context: " + value))
-
-	w.Write([]byte("Value2 from context: " + value2))
-
+	w.Header().Set("Content-Type", "Application/Json")
+	w.Write(b)
 	return
 }

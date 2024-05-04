@@ -30,6 +30,15 @@ func (r Repository) GetUserByID(ctx context.Context, id uint) (*entities.User, e
 	return &user, nil
 }
 
+func (r Repository) GetUserByEmail(ctx context.Context, email string) (*entities.User, error) {
+	var user entities.User
+	result := r.DbGorm.First(&user, "email=?", email)
+	if result.Error != nil {
+		return nil, result.Error
+	}
+	return &user, nil
+}
+
 // UpdateUser updates an existing user record in the database
 func (r Repository) UpdateUser(ctx context.Context, user *entities.User) error {
 	result := r.DbGorm.Save(&user)

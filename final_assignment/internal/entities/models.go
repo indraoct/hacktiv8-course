@@ -10,8 +10,8 @@ type User struct {
 	Email       string        `gorm:"not null, unique" json:"email,omitempty"`
 	Password    string        `json:"-"`
 	Age         int           `json:"age,omitempty"`
-	CreatedAt   time.Time     `json:"created_at,omitempty"`
-	UpdatedAt   time.Time     `json:"updated_at,omitempty"`
+	CreatedAt   time.Time     `json:"-"`
+	UpdatedAt   time.Time     `json:"-"`
 	Token       string        `json:"token,omitempty" gorm:"-"`
 	Comment     []Comment     `json:"comment,omitempty" gorm:"foreignKey:UserID;constraint:OnUpdate:CASCADE,OnDelete:SET NULL;"`
 	Photo       []Photo       `json:"photo,omitempty" gorm:"foreignKey:UserID;constraint:OnUpdate:CASCADE,OnDelete:SET NULL;"`

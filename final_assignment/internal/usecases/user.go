@@ -74,7 +74,45 @@ func (u Usecases) Register(ctx context.Context, req entities.Request) (httpStatu
 	return
 }
 
-func (u Usecases) Login(ctx context.Context, req entities.Request) (httpStatus int, err error) {
+func (u Usecases) Login(ctx context.Context, req entities.Request) (token string, httpStatus int, err error) {
+
+	var user *entities.User
+
+	defer func() {
+		helper.RecoverPanic()
+
+		httpStatus = http.StatusOK
+		if err != nil {
+			httpStatus = http.StatusBadRequest
+		}
+	}()
+
+	//general field validation
+	valid := validation.Validation{}
+	valid.Required(req.Email, "email")
+	valid.Email(req.Email, "email")
+	valid.Required(req.Password, "password")
+	valid.MinSize(req.Password, 6, "password")
+
+	if valid.HasErrors() {
+		for _, errValidate := range valid.Errors {
+			err = errors.New(errValidate.Key + ": " + errValidate.Message)
+			return
+		}
+	}
+
+	user, err = u.repo.GetUserByEmail(ctx, req.Email)
+	if err != nil {
+		return
+	}
+
+	//check hashing the password
+	if !security.BcryptCheckPasswordHash(req.Password, user.Password) {
+		err = errors.New("invalid password")
+		return
+	}
+
+	token, err = u.opt.JwtGen.GenerateToken(*user, 1800)
 
 	return
 }

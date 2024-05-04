@@ -14,6 +14,7 @@ type Usecases struct {
 
 type UsecaseImpl interface {
 	Register(ctx context.Context, req entities.Request) (httpStatus int, err error)
+	Login(ctx context.Context, req entities.Request) (token string, httpStatus int, err error)
 }
 
 func NewUsecase(opt options.Options, repo repositories.RepositoryImpl) UsecaseImpl {

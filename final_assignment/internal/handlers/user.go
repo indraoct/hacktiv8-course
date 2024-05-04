@@ -38,3 +38,37 @@ func (h Handler) Register(w http.ResponseWriter, req *http.Request) {
 
 	return
 }
+
+func (h Handler) Login(w http.ResponseWriter, req *http.Request) {
+
+	var (
+		request    entities.Request
+		httpStatus int
+		err        error
+		token      string
+		user       entities.User
+	)
+
+	//default http status
+	httpStatus = http.StatusBadRequest
+
+	defer func() {
+		helper.RecoverPanic()
+		user.Token = token
+		entities.MessageResponse(err, httpStatus, user, w)
+	}()
+
+	body, err := io.ReadAll(req.Body)
+	if err != nil {
+		return
+	}
+
+	err = json.Unmarshal(body, &request)
+	if err != nil {
+		return
+	}
+
+	token, httpStatus, err = h.usecase.Login(req.Context(), request)
+
+	return
+}

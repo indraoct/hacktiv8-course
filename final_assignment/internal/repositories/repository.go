@@ -14,6 +14,7 @@ type RepositoryImpl interface {
 	CreateUser(ctx context.Context, user entities.User) error
 	GetUserByID(ctx context.Context, id uint) (*entities.User, error)
 	GetAllUsers(ctx context.Context) ([]entities.User, error)
+	GetUserByEmail(ctx context.Context, email string) (*entities.User, error)
 	UpdateUser(ctx context.Context, user *entities.User) error
 	DeleteUser(ctx context.Context, id uint) error
 

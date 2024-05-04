@@ -57,7 +57,7 @@ func StartServer() {
 	handler := handlers.NewHandler(opt, useCase)
 	log.Println("Success set handler: ", handler)
 
-	muxRouter := router.RegisterRouter(handler, repo)
+	muxRouter := router.RegisterRouter(handler, repo, jwtPkg)
 
 	srv := &http.Server{
 		Addr:         ":" + port,
