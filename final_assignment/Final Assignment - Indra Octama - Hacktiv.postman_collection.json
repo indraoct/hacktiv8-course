@@ -1,0 +1,1191 @@
+{
+	"info": {
+		"_postman_id": "e172b9e4-c485-4fca-9e79-e965919a23c3",
+		"name": "Final Assignment - Indra Octama - Hacktiv",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "80425"
+	},
+	"item": [
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"John Doe 2\",\n  \"title\":\"Pak\",\n  \"age\": 31,\n  \"email\": \"john1.doe@example.com\",\n  \"password\": \"hihihihihi\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8090/register",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Example error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"username\": \"John Doe\",\n  \"title\":\"Pak\",\n  \"age\": 30,\n  \"email\": \"john.doe@example.com\",\n  \"password\": \"hihihihihi\"\n}\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8090/register",
+									"host": [
+										"localhost"
+									],
+									"port": "8090",
+									"path": [
+										"register"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "Application/Json"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 03 May 2024 18:11:20 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "90"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 400,\n    \"message\": \"user: john.doe@example.com, John Doe is already exist\",\n    \"data\": \"\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"john1.doe@example.com\",\n  \"password\": \"hihihihihi\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8090/login",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pong",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJpbmRyYWhhY3RpdmFwcHMiLCJleHAiOjE3MTQ4MDE3NDksImp0aSI6IjJmek5TeThtM1JFZVkzZTBYZWV4dUFwMnlSayIsImlhdCI6MTcxNDc5OTk0OSwiaXNzIjoiaW5kcmFoYWN0aXYuY29tIiwic3ViIjoidXNlciIsImlkIjo2LCJ1c2VybmFtZSI6IkpvaG4gRG9lIiwiZW1haWwiOiJqb2huLmRvZUBleGFtcGxlLmNvbSJ9.EluNdHZuass4F4CiqPCh_zZvJB92NMgIa9B-BSNsDw8VPQqCJr5ot9lb88rrnMozFncmo7zm1siS6KQZhAZu4rECp3yQTXTtooXWrgeimWdYLEN0PuDz01JL0ikz7AaS6Bi4KJ_bx3xBQHsnCZKZEb0WjOPuGCy5uZTeiXPNbho",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8090/pong",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"pong"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "photo",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJpbmRyYWhhY3RpdmFwcHMiLCJleHAiOjE3MTQ4MjA5NDMsImp0aSI6IjJnMDBNd3Y0ZVc3d1pjUW1Ja0lmV29FY0U0cCIsImlhdCI6MTcxNDgxOTE0MywiaXNzIjoiaW5kcmFoYWN0aXYuY29tIiwic3ViIjoidXNlciIsImlkIjo2LCJ1c2VybmFtZSI6IkpvaG4gRG9lIiwiZW1haWwiOiJqb2huLmRvZUBleGFtcGxlLmNvbSJ9.b5iAuahh277MXChlDlYxb0SKjtjS4giN_KO9uGq9fTR7EOfEI91vaZg9WhEMB04BQvqSV1GeChmu3-iSmUpGQ6eUxipmZQVW9M4x3Y3R0PRTe1DIjyhB6Bltq0efljjKTu3aLMYuqJcR-4R3rJJGk8KYeuTdGl_dq4uHFZEH3aw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"photoUrl\" : \"https://i.pinimg.com/736x/0a/a6/5c/0aa65cd3bfc22cdb5df7b5e7573ee523.jpg\",\n    \"photoTitle\" : \"Zee Kebaya\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8090/photo/create",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"photo",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJpbmRyYWhhY3RpdmFwcHMiLCJleHAiOjE3MTQ4MDI1MTMsImp0aSI6IjJmelAwejVraUswVVJjZGh2NXJEQnB5NDdNYiIsImlhdCI6MTcxNDgwMDcxMywiaXNzIjoiaW5kcmFoYWN0aXYuY29tIiwic3ViIjoidXNlciIsImlkIjo2LCJ1c2VybmFtZSI6IkpvaG4gRG9lIiwiZW1haWwiOiJqb2huLmRvZUBleGFtcGxlLmNvbSJ9.kTy2TKfMVrKGhgwgFQxvtxseP2mx7V1IFW5GSH5dBcbghkjrRJY9uPqUFRNzLoCFDggaq7QUrmGFF_wOts95UKaOMSv2n296lwejoN9fiIxkp-WAH9s59mAzIToL-8DrV5XS5p6jaW37KsZtaVQ3rZh3zJD_npktFLfKxNWgCvY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8090/photo/get_all",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"photo",
+								"get_all"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success Example",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8090/user/get_all",
+									"host": [
+										"localhost"
+									],
+									"port": "8090",
+									"path": [
+										"user",
+										"get_all"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "Application/Json"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 04 May 2024 05:34:02 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "291"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 0,\n    \"message\": \"Success\",\n    \"data\": [\n        {\n            \"id\": 6,\n            \"caption\": \"Zee JKT48\",\n            \"photo_url\": \"https://static.promediateknologi.id/crop/0x0:0x0/750x500/webp/photo/jawapos/2022/04/zee-jkt48.jpg\",\n            \"created_at\": \"2024-05-04T12:19:31.761824+07:00\",\n            \"updated_at\": \"2024-05-04T12:19:31.762214+07:00\",\n            \"UserID\": 6\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Get By Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJpbmRyYWhhY3RpdmFwcHMiLCJleHAiOjE3MTQ4MTk1NDQsImp0aSI6IjJmenhYOXJOTzV0SExwWDREQ3o1dmhaUWc4MCIsImlhdCI6MTcxNDgxNzc0NCwiaXNzIjoiaW5kcmFoYWN0aXYuY29tIiwic3ViIjoidXNlciIsImlkIjo2LCJ1c2VybmFtZSI6IkpvaG4gRG9lIiwiZW1haWwiOiJqb2huLmRvZUBleGFtcGxlLmNvbSJ9.cP5nBxa-zEJzWmkU8rpdVqUumNL_UG8pzP0If02HWRXTrJHz21leUpPXnQ5IIfKV-fzgT0ALXvlG_XfQJ6PSmfcC6QjpxZbLuFIz3dp5sewpHNr0Xdd49CDNDaLwYdWpJStQJEK7KrYRERc2V5iWO48ocT3UdO_f6-IHzxfQJik",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8090/photo/get/6",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"photo",
+								"get",
+								"6"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success Example",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8090/user/get_all",
+									"host": [
+										"localhost"
+									],
+									"port": "8090",
+									"path": [
+										"user",
+										"get_all"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "Application/Json"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 04 May 2024 05:34:02 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "291"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 0,\n    \"message\": \"Success\",\n    \"data\": [\n        {\n            \"id\": 6,\n            \"caption\": \"Zee JKT48\",\n            \"photo_url\": \"https://static.promediateknologi.id/crop/0x0:0x0/750x500/webp/photo/jawapos/2022/04/zee-jkt48.jpg\",\n            \"created_at\": \"2024-05-04T12:19:31.761824+07:00\",\n            \"updated_at\": \"2024-05-04T12:19:31.762214+07:00\",\n            \"UserID\": 6\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJpbmRyYWhhY3RpdmFwcHMiLCJleHAiOjE3MTQ4MjA5NDMsImp0aSI6IjJnMDBNd3Y0ZVc3d1pjUW1Ja0lmV29FY0U0cCIsImlhdCI6MTcxNDgxOTE0MywiaXNzIjoiaW5kcmFoYWN0aXYuY29tIiwic3ViIjoidXNlciIsImlkIjo2LCJ1c2VybmFtZSI6IkpvaG4gRG9lIiwiZW1haWwiOiJqb2huLmRvZUBleGFtcGxlLmNvbSJ9.b5iAuahh277MXChlDlYxb0SKjtjS4giN_KO9uGq9fTR7EOfEI91vaZg9WhEMB04BQvqSV1GeChmu3-iSmUpGQ6eUxipmZQVW9M4x3Y3R0PRTe1DIjyhB6Bltq0efljjKTu3aLMYuqJcR-4R3rJJGk8KYeuTdGl_dq4uHFZEH3aw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"photoUrl\" : \"https://cdns.klimg.com/bola.net/resized/810x540/library/upload/21/2022/12/996x664/20221229bl_piala-aff_d9e19a9.jpg\",\n    \"photoTitle\" : \"Shin Taeyong\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8090/photo/update/6",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"photo",
+								"update",
+								"6"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success Example",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8090/user/get_all",
+									"host": [
+										"localhost"
+									],
+									"port": "8090",
+									"path": [
+										"user",
+										"get_all"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "Application/Json"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 04 May 2024 05:34:02 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "291"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 0,\n    \"message\": \"Success\",\n    \"data\": [\n        {\n            \"id\": 6,\n            \"caption\": \"Zee JKT48\",\n            \"photo_url\": \"https://static.promediateknologi.id/crop/0x0:0x0/750x500/webp/photo/jawapos/2022/04/zee-jkt48.jpg\",\n            \"created_at\": \"2024-05-04T12:19:31.761824+07:00\",\n            \"updated_at\": \"2024-05-04T12:19:31.762214+07:00\",\n            \"UserID\": 6\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJpbmRyYWhhY3RpdmFwcHMiLCJleHAiOjE3MTQ4MjA5NDMsImp0aSI6IjJnMDBNd3Y0ZVc3d1pjUW1Ja0lmV29FY0U0cCIsImlhdCI6MTcxNDgxOTE0MywiaXNzIjoiaW5kcmFoYWN0aXYuY29tIiwic3ViIjoidXNlciIsImlkIjo2LCJ1c2VybmFtZSI6IkpvaG4gRG9lIiwiZW1haWwiOiJqb2huLmRvZUBleGFtcGxlLmNvbSJ9.b5iAuahh277MXChlDlYxb0SKjtjS4giN_KO9uGq9fTR7EOfEI91vaZg9WhEMB04BQvqSV1GeChmu3-iSmUpGQ6eUxipmZQVW9M4x3Y3R0PRTe1DIjyhB6Bltq0efljjKTu3aLMYuqJcR-4R3rJJGk8KYeuTdGl_dq4uHFZEH3aw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8090/photo/delete/7",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"photo",
+								"delete",
+								"7"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success Example",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8090/user/get_all",
+									"host": [
+										"localhost"
+									],
+									"port": "8090",
+									"path": [
+										"user",
+										"get_all"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "Application/Json"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 04 May 2024 05:34:02 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "291"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 0,\n    \"message\": \"Success\",\n    \"data\": [\n        {\n            \"id\": 6,\n            \"caption\": \"Zee JKT48\",\n            \"photo_url\": \"https://static.promediateknologi.id/crop/0x0:0x0/750x500/webp/photo/jawapos/2022/04/zee-jkt48.jpg\",\n            \"created_at\": \"2024-05-04T12:19:31.761824+07:00\",\n            \"updated_at\": \"2024-05-04T12:19:31.762214+07:00\",\n            \"UserID\": 6\n        }\n    ]\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "comment",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJpbmRyYWhhY3RpdmFwcHMiLCJleHAiOjE3MTQ4MjQ1NDAsImp0aSI6IjJnMDdmMjdoaEZHZEhrUm12Mlg3VWtrcXBDUCIsImlhdCI6MTcxNDgyMjc0MCwiaXNzIjoiaW5kcmFoYWN0aXYuY29tIiwic3ViIjoidXNlciIsImlkIjo3LCJ1c2VybmFtZSI6IkpvaG4gRG9lIDIiLCJlbWFpbCI6ImpvaG4xLmRvZUBleGFtcGxlLmNvbSJ9.oGE-mZ1wAEc3DUmFzP10r-1tIreqOX5WDnYj3W2xyXJm9CLcAUU77DyNWgU3Ar4jjSjOOG-g5WUO5eM3QYhyla7Y8B4o0E1FD87uDTKU-Kc0P0o7fxsPK0V_kcuOLArLsWlFhdg5UpF_3IsPcHxYzLGx7jK0PRvhviPiB1Vqdrk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"photoId\" : 6,\n    \"message\" : \"iya loh cakep banget Zee\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8090/comment/create",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"comment",
+								"create"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"photoId\" : 6,\n    \"message\" : \"iya loh cakep banget Zee\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8090/comment/create",
+									"host": [
+										"localhost"
+									],
+									"port": "8090",
+									"path": [
+										"comment",
+										"create"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "Application/Json"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 04 May 2024 11:39:25 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "42"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 0,\n    \"message\": \"Success\",\n    \"data\": \"\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get All",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJpbmRyYWhhY3RpdmFwcHMiLCJleHAiOjE3MTQ4MjQ1NDAsImp0aSI6IjJnMDdmMjdoaEZHZEhrUm12Mlg3VWtrcXBDUCIsImlhdCI6MTcxNDgyMjc0MCwiaXNzIjoiaW5kcmFoYWN0aXYuY29tIiwic3ViIjoidXNlciIsImlkIjo3LCJ1c2VybmFtZSI6IkpvaG4gRG9lIDIiLCJlbWFpbCI6ImpvaG4xLmRvZUBleGFtcGxlLmNvbSJ9.oGE-mZ1wAEc3DUmFzP10r-1tIreqOX5WDnYj3W2xyXJm9CLcAUU77DyNWgU3Ar4jjSjOOG-g5WUO5eM3QYhyla7Y8B4o0E1FD87uDTKU-Kc0P0o7fxsPK0V_kcuOLArLsWlFhdg5UpF_3IsPcHxYzLGx7jK0PRvhviPiB1Vqdrk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8090/comment/get_all",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"comment",
+								"get_all"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8090/comment/get_all",
+									"host": [
+										"localhost"
+									],
+									"port": "8090",
+									"path": [
+										"comment",
+										"get_all"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "Application/Json"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 04 May 2024 11:40:27 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "206"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 0,\n    \"message\": \"Success\",\n    \"data\": [\n        {\n            \"id\": 7,\n            \"message\": \"iya loh cakep banget Zee\",\n            \"created_at\": \"2024-05-04T18:39:25.089172+07:00\",\n            \"updated_at\": \"2024-05-04T18:39:25.089698+07:00\",\n            \"UserID\": 7,\n            \"PhotoID\": 6\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Get By Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJpbmRyYWhhY3RpdmFwcHMiLCJleHAiOjE3MTQ4MjQ1NDAsImp0aSI6IjJnMDdmMjdoaEZHZEhrUm12Mlg3VWtrcXBDUCIsImlhdCI6MTcxNDgyMjc0MCwiaXNzIjoiaW5kcmFoYWN0aXYuY29tIiwic3ViIjoidXNlciIsImlkIjo3LCJ1c2VybmFtZSI6IkpvaG4gRG9lIDIiLCJlbWFpbCI6ImpvaG4xLmRvZUBleGFtcGxlLmNvbSJ9.oGE-mZ1wAEc3DUmFzP10r-1tIreqOX5WDnYj3W2xyXJm9CLcAUU77DyNWgU3Ar4jjSjOOG-g5WUO5eM3QYhyla7Y8B4o0E1FD87uDTKU-Kc0P0o7fxsPK0V_kcuOLArLsWlFhdg5UpF_3IsPcHxYzLGx7jK0PRvhviPiB1Vqdrk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8090/comment/get/7",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"comment",
+								"get",
+								"7"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8090/comment/get/7",
+									"host": [
+										"localhost"
+									],
+									"port": "8090",
+									"path": [
+										"comment",
+										"get",
+										"7"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "Application/Json"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 04 May 2024 11:41:33 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "204"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 0,\n    \"message\": \"Success\",\n    \"data\": {\n        \"id\": 7,\n        \"message\": \"iya loh cakep banget Zee\",\n        \"created_at\": \"2024-05-04T18:39:25.089172+07:00\",\n        \"updated_at\": \"2024-05-04T18:39:25.089698+07:00\",\n        \"UserID\": 7,\n        \"PhotoID\": 6\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJpbmRyYWhhY3RpdmFwcHMiLCJleHAiOjE3MTQ4MjYxMDAsImp0aSI6IjJnMEFwN1BNd2xrbHZUVWR4UzQxV3hsaGkycSIsImlhdCI6MTcxNDgyNDMwMCwiaXNzIjoiaW5kcmFoYWN0aXYuY29tIiwic3ViIjoidXNlciIsImlkIjo3LCJ1c2VybmFtZSI6IkpvaG4gRG9lIDIiLCJlbWFpbCI6ImpvaG4xLmRvZUBleGFtcGxlLmNvbSJ9.Z-L2XrNDqdX8DIM4s5fDNDnlKr2pTERsoi98fj2qlShWJladrASXK2KXrE721FT5o6DplOopzQdvAkIN-kJ6GvyFdv_p8XXo0MRvsvNIHibssr7DF5Fb2c2G1-yqEW4PW73iUqWUizga4JfkIUS_jgPsU3pJJR0vBNbYgUknd6A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"photoId\" : 6,\n    \"message\" : \"iya loh cakep banget Zee JKT48 hihihihihi\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8090/comment/update/7",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"comment",
+								"update",
+								"7"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"photoId\" : 6,\n    \"message\" : \"iya loh cakep banget Zee JKT48 hihihihihi\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8090/comment/update/7",
+									"host": [
+										"localhost"
+									],
+									"port": "8090",
+									"path": [
+										"comment",
+										"update",
+										"7"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "Application/Json"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 04 May 2024 12:07:28 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "221"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 0,\n    \"message\": \"Success\",\n    \"data\": {\n        \"id\": 7,\n        \"message\": \"iya loh cakep banget Zee JKT48 hihihihihi\",\n        \"created_at\": \"2024-05-04T19:07:28.783366+07:00\",\n        \"updated_at\": \"2024-05-04T19:07:28.785126+07:00\",\n        \"UserID\": 7,\n        \"PhotoID\": 6\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJpbmRyYWhhY3RpdmFwcHMiLCJleHAiOjE3MTQ4MjYxMDAsImp0aSI6IjJnMEFwN1BNd2xrbHZUVWR4UzQxV3hsaGkycSIsImlhdCI6MTcxNDgyNDMwMCwiaXNzIjoiaW5kcmFoYWN0aXYuY29tIiwic3ViIjoidXNlciIsImlkIjo3LCJ1c2VybmFtZSI6IkpvaG4gRG9lIDIiLCJlbWFpbCI6ImpvaG4xLmRvZUBleGFtcGxlLmNvbSJ9.Z-L2XrNDqdX8DIM4s5fDNDnlKr2pTERsoi98fj2qlShWJladrASXK2KXrE721FT5o6DplOopzQdvAkIN-kJ6GvyFdv_p8XXo0MRvsvNIHibssr7DF5Fb2c2G1-yqEW4PW73iUqWUizga4JfkIUS_jgPsU3pJJR0vBNbYgUknd6A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8090/comment/delete/7",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"comment",
+								"delete",
+								"7"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "socialmedia",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJpbmRyYWhhY3RpdmFwcHMiLCJleHAiOjE3MTQ4NDIwMzMsImp0aSI6IjJnMGg3THdISDJzQXk5dkdCOERidG5aWk9nbSIsImlhdCI6MTcxNDg0MDIzMywiaXNzIjoiaW5kcmFoYWN0aXYuY29tIiwic3ViIjoidXNlciIsImlkIjo2LCJ1c2VybmFtZSI6IkpvaG4gRG9lIDIiLCJlbWFpbCI6ImpvaG4xLmRvZUBleGFtcGxlLmNvbSJ9.gDWw0Dl6-T4k167Wry8Nl8radAdSrRIcnwyGMlRgl58AO18xBHYw3biTaH5kzoD6jsiUzvj85ogTf4OYcHECosauBOMr-Q1BWVv2O0Xf9P2SmkhXneCU1XAxi-6X2tUGYmhQ69uiy0hdBnEweCeJl2Zbh1e_-WcDlfsyoy37Hss",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"socialName\" : \"facebook aqyu\",\n    \"socialUrl\" : \"http://localhost:8080/sosmedaqyu\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8090/social/create",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"social",
+								"create"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"socialName\" : \"facebook aqyu\",\n    \"socialUrl\" : \"http://localhost:8080/sosmedaqyu\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8090/social/create",
+									"host": [
+										"localhost"
+									],
+									"port": "8090",
+									"path": [
+										"social",
+										"create"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "Application/Json"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 04 May 2024 16:30:46 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "42"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 0,\n    \"message\": \"Success\",\n    \"data\": \"\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get All",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJpbmRyYWhhY3RpdmFwcHMiLCJleHAiOjE3MTQ4NDIwMzMsImp0aSI6IjJnMGg3THdISDJzQXk5dkdCOERidG5aWk9nbSIsImlhdCI6MTcxNDg0MDIzMywiaXNzIjoiaW5kcmFoYWN0aXYuY29tIiwic3ViIjoidXNlciIsImlkIjo2LCJ1c2VybmFtZSI6IkpvaG4gRG9lIDIiLCJlbWFpbCI6ImpvaG4xLmRvZUBleGFtcGxlLmNvbSJ9.gDWw0Dl6-T4k167Wry8Nl8radAdSrRIcnwyGMlRgl58AO18xBHYw3biTaH5kzoD6jsiUzvj85ogTf4OYcHECosauBOMr-Q1BWVv2O0Xf9P2SmkhXneCU1XAxi-6X2tUGYmhQ69uiy0hdBnEweCeJl2Zbh1e_-WcDlfsyoy37Hss",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8090/social/get_all",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"social",
+								"get_all"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8090/social/get_all",
+									"host": [
+										"localhost"
+									],
+									"port": "8090",
+									"path": [
+										"social",
+										"get_all"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "Application/Json"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 04 May 2024 16:31:42 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "233"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 0,\n    \"message\": \"Success\",\n    \"data\": [\n        {\n            \"id\": 6,\n            \"name\": \"facebook aqyu\",\n            \"social_media_url\": \"http://localhost:8080/sosmedaqyu\",\n            \"created_at\": \"2024-05-04T23:30:46.57455+07:00\",\n            \"updated_at\": \"2024-05-04T23:30:46.575279+07:00\",\n            \"UserID\": 6\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Get By Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJpbmRyYWhhY3RpdmFwcHMiLCJleHAiOjE3MTQ4NDIwMzMsImp0aSI6IjJnMGg3THdISDJzQXk5dkdCOERidG5aWk9nbSIsImlhdCI6MTcxNDg0MDIzMywiaXNzIjoiaW5kcmFoYWN0aXYuY29tIiwic3ViIjoidXNlciIsImlkIjo2LCJ1c2VybmFtZSI6IkpvaG4gRG9lIDIiLCJlbWFpbCI6ImpvaG4xLmRvZUBleGFtcGxlLmNvbSJ9.gDWw0Dl6-T4k167Wry8Nl8radAdSrRIcnwyGMlRgl58AO18xBHYw3biTaH5kzoD6jsiUzvj85ogTf4OYcHECosauBOMr-Q1BWVv2O0Xf9P2SmkhXneCU1XAxi-6X2tUGYmhQ69uiy0hdBnEweCeJl2Zbh1e_-WcDlfsyoy37Hss",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8090/social/get/6",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"social",
+								"get",
+								"6"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8090/social/get/6",
+									"host": [
+										"localhost"
+									],
+									"port": "8090",
+									"path": [
+										"social",
+										"get",
+										"6"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "Application/Json"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 04 May 2024 16:32:24 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "231"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 0,\n    \"message\": \"Success\",\n    \"data\": {\n        \"id\": 6,\n        \"name\": \"facebook aqyu\",\n        \"social_media_url\": \"http://localhost:8080/sosmedaqyu\",\n        \"created_at\": \"2024-05-04T23:30:46.57455+07:00\",\n        \"updated_at\": \"2024-05-04T23:30:46.575279+07:00\",\n        \"UserID\": 6\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJpbmRyYWhhY3RpdmFwcHMiLCJleHAiOjE3MTQ4NDIwMzMsImp0aSI6IjJnMGg3THdISDJzQXk5dkdCOERidG5aWk9nbSIsImlhdCI6MTcxNDg0MDIzMywiaXNzIjoiaW5kcmFoYWN0aXYuY29tIiwic3ViIjoidXNlciIsImlkIjo2LCJ1c2VybmFtZSI6IkpvaG4gRG9lIDIiLCJlbWFpbCI6ImpvaG4xLmRvZUBleGFtcGxlLmNvbSJ9.gDWw0Dl6-T4k167Wry8Nl8radAdSrRIcnwyGMlRgl58AO18xBHYw3biTaH5kzoD6jsiUzvj85ogTf4OYcHECosauBOMr-Q1BWVv2O0Xf9P2SmkhXneCU1XAxi-6X2tUGYmhQ69uiy0hdBnEweCeJl2Zbh1e_-WcDlfsyoy37Hss",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"socialName\" : \"facebook aqyuuuu\",\n    \"socialUrl\" : \"http://localhost:8080/sosmedaqyuuuu\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8090/social/update/6",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"social",
+								"update",
+								"6"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"socialName\" : \"facebook aqyuuuu\",\n    \"socialUrl\" : \"http://localhost:8080/sosmedaqyuuuu\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8090/social/update/6",
+									"host": [
+										"localhost"
+									],
+									"port": "8090",
+									"path": [
+										"social",
+										"update",
+										"6"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "Application/Json"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 04 May 2024 16:33:59 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "226"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 0,\n    \"message\": \"Success\",\n    \"data\": {\n        \"id\": 6,\n        \"name\": \"facebook aqyuuuu\",\n        \"social_media_url\": \"http://localhost:8080/sosmedaqyuuuu\",\n        \"created_at\": \"0001-01-01T00:00:00Z\",\n        \"updated_at\": \"2024-05-04T23:33:59.646738+07:00\",\n        \"UserID\": 6\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJpbmRyYWhhY3RpdmFwcHMiLCJleHAiOjE3MTQ4MTk1NDQsImp0aSI6IjJmenhYOXJOTzV0SExwWDREQ3o1dmhaUWc4MCIsImlhdCI6MTcxNDgxNzc0NCwiaXNzIjoiaW5kcmFoYWN0aXYuY29tIiwic3ViIjoidXNlciIsImlkIjo2LCJ1c2VybmFtZSI6IkpvaG4gRG9lIiwiZW1haWwiOiJqb2huLmRvZUBleGFtcGxlLmNvbSJ9.cP5nBxa-zEJzWmkU8rpdVqUumNL_UG8pzP0If02HWRXTrJHz21leUpPXnQ5IIfKV-fzgT0ALXvlG_XfQJ6PSmfcC6QjpxZbLuFIz3dp5sewpHNr0Xdd49CDNDaLwYdWpJStQJEK7KrYRERc2V5iWO48ocT3UdO_f6-IHzxfQJik",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8090/social/delete/6",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"social",
+								"delete",
+								"6"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:8090/social/delete/6",
+									"host": [
+										"localhost"
+									],
+									"port": "8090",
+									"path": [
+										"social",
+										"delete",
+										"6"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "Application/Json"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 04 May 2024 16:34:48 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "42"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 0,\n    \"message\": \"Success\",\n    \"data\": \"\"\n}"
+						}
+					]
+				}
+			]
+		}
+	]
+}

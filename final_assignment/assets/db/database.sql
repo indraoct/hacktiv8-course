@@ -31,7 +31,7 @@ CREATE TABLE comments (
 );
 
 -- Create Social Media table
-CREATE TABLE  socialmedias (
+CREATE TABLE  social_media (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255),
     social_media_url VARCHAR(255),
@@ -67,7 +67,7 @@ INSERT INTO comments (user_id, photo_id, message, created_at, updated_at) VALUES
                                                                                       (5,  5, 'Message 5', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
 -- Insert into Social Media table
-INSERT INTO socialmedias (name, social_media_url, user_id, created_at, updated_at) VALUES
+INSERT INTO social_media (name, social_media_url, user_id, created_at, updated_at) VALUES
                                                                                       ('User One', 'https://twitter.com/user1', 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
                                                                                       ('User Two', 'https://facebook.com/user2', 2, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
                                                                                       ('User Three', 'https://instagram.com/user3', 3, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
