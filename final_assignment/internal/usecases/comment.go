@@ -155,7 +155,7 @@ func (u Usecases) UpdateComment(ctx context.Context, req entities.Request) (comm
 		ID:        req.CommentId,
 		Message:   req.Message,
 		PhotoID:   req.PhotoId,
-		CreatedAt: time.Now(),
+		UpdatedAt: time.Now(),
 		UserID:    user.ID,
 	}
 

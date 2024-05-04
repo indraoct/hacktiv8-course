@@ -16,6 +16,9 @@ type Request struct {
 	PhotoUrl   string `json:"photoUrl,omitempty"`
 	CommentId  uint   `json:"commentId"`
 	Message    string `json:"message,omitempty"`
+	SocialId   uint   `json:"socialId,omitempty"`
+	SocialName string `json:"socialName,omitempty"`
+	SocialUrl  string `json:"socialUrl,omitempty"`
 }
 
 type Response struct {

@@ -11,11 +11,11 @@ import (
 	"time"
 )
 
-func (u Usecases) CreatePhoto(ctx context.Context, req entities.Request) (httpStatus int, err error) {
+func (u Usecases) CreateSocial(ctx context.Context, req entities.Request) (httpStatus int, err error) {
 
 	var (
-		user  entities.User
-		photo entities.Photo
+		user   entities.User
+		social entities.SocialMedia
 	)
 
 	defer func() {
@@ -29,8 +29,8 @@ func (u Usecases) CreatePhoto(ctx context.Context, req entities.Request) (httpSt
 
 	//general field validation
 	valid := validation.Validation{}
-	valid.Required(req.PhotoTitle, "photoTitle")
-	valid.Required(req.PhotoUrl, "photoUrl")
+	valid.Required(req.SocialName, "socialName")
+	valid.Required(req.SocialUrl, "socialUrl")
 
 	if valid.HasErrors() {
 		for _, errValidate := range valid.Errors {
@@ -40,19 +40,19 @@ func (u Usecases) CreatePhoto(ctx context.Context, req entities.Request) (httpSt
 	}
 
 	user = middleware.GetAuth(ctx)
-	photo = entities.Photo{
-		Caption:   req.PhotoTitle,
-		PhotoURL:  req.PhotoUrl,
-		CreatedAt: time.Now(),
-		UserID:    user.ID,
+	social = entities.SocialMedia{
+		Name:           req.SocialName,
+		SocialMediaURL: req.SocialUrl,
+		CreatedAt:      time.Now(),
+		UserID:         user.ID,
 	}
 
-	err = u.repo.CreatePhoto(ctx, &photo)
+	err = u.repo.CreateSocialMedia(ctx, &social)
 
 	return
 }
 
-func (u Usecases) GetAllPhoto(ctx context.Context) (photos *[]entities.Photo, httpStatus int, err error) {
+func (u Usecases) GetAllSocial(ctx context.Context) (socials *[]entities.SocialMedia, httpStatus int, err error) {
 
 	var (
 		user entities.User
@@ -69,11 +69,11 @@ func (u Usecases) GetAllPhoto(ctx context.Context) (photos *[]entities.Photo, ht
 
 	user = middleware.GetAuth(ctx)
 
-	photos, err = u.repo.GetPhotoByUserID(ctx, user.ID)
+	socials, err = u.repo.GetSocialByUserID(ctx, user.ID)
 	return
 }
 
-func (u Usecases) GetPhotoById(ctx context.Context, req entities.Request) (photo *entities.Photo, httpStatus int, err error) {
+func (u Usecases) GetSocialById(ctx context.Context, req entities.Request) (social *entities.SocialMedia, httpStatus int, err error) {
 
 	var (
 		user entities.User
@@ -89,7 +89,7 @@ func (u Usecases) GetPhotoById(ctx context.Context, req entities.Request) (photo
 	}()
 
 	valid := validation.Validation{}
-	valid.Required(req.PhotoId, "photoId")
+	valid.Required(req.SocialId, "socialId")
 
 	if valid.HasErrors() {
 		for _, errValidate := range valid.Errors {
@@ -100,11 +100,11 @@ func (u Usecases) GetPhotoById(ctx context.Context, req entities.Request) (photo
 
 	user = middleware.GetAuth(ctx)
 
-	photo, err = u.repo.GetPhotoByIDAndUserID(ctx, user.ID, req.PhotoId)
+	social, err = u.repo.GetSocialByIDAndUserID(ctx, user.ID, req.PhotoId)
 	return
 }
 
-func (u Usecases) UpdatePhoto(ctx context.Context, req entities.Request) (photo *entities.Photo, httpStatus int, err error) {
+func (u Usecases) UpdateSocial(ctx context.Context, req entities.Request) (social *entities.SocialMedia, httpStatus int, err error) {
 
 	var (
 		user entities.User
@@ -121,9 +121,9 @@ func (u Usecases) UpdatePhoto(ctx context.Context, req entities.Request) (photo 
 
 	//general field validation
 	valid := validation.Validation{}
-	valid.Required(req.PhotoId, "photoId")
-	valid.Required(req.PhotoTitle, "photoTitle")
-	valid.Required(req.PhotoUrl, "photoUrl")
+	valid.Required(req.SocialId, "socialId")
+	valid.Required(req.SocialName, "socialName")
+	valid.Required(req.SocialUrl, "socialUrl")
 
 	if valid.HasErrors() {
 		for _, errValidate := range valid.Errors {
@@ -134,31 +134,31 @@ func (u Usecases) UpdatePhoto(ctx context.Context, req entities.Request) (photo 
 
 	user = middleware.GetAuth(ctx)
 
-	photo, err = u.repo.GetPhotoByIDAndUserID(ctx, user.ID, req.PhotoId)
-	if err != nil || photo == nil {
-		err = errors.New("photo you want to edit is not your photo")
+	social, err = u.repo.GetSocialByIDAndUserID(ctx, user.ID, req.SocialId)
+	if err != nil || social == nil {
+		err = errors.New("social media you want to edit is not your social media")
 		return
 	}
 
-	photo = &entities.Photo{
-		ID:        req.PhotoId,
-		Caption:   req.PhotoTitle,
-		PhotoURL:  req.PhotoUrl,
-		UpdatedAt: time.Now(),
-		UserID:    user.ID,
+	social = &entities.SocialMedia{
+		ID:             req.SocialId,
+		Name:           req.SocialName,
+		SocialMediaURL: req.SocialUrl,
+		UpdatedAt:      time.Now(),
+		UserID:         user.ID,
 	}
 
-	err = u.repo.UpdatePhoto(ctx, photo)
+	err = u.repo.UpdateSocialMedia(ctx, social)
 
 	return
 }
 
-func (u Usecases) DeletePhoto(ctx context.Context, req entities.Request) (httpStatus int, err error) {
+func (u Usecases) DeleteSocial(ctx context.Context, req entities.Request) (httpStatus int, err error) {
 
 	var (
-		user     entities.User
-		photo    entities.Photo
-		photoPtr *entities.Photo
+		user      entities.User
+		social    entities.SocialMedia
+		socialPtr *entities.SocialMedia
 	)
 
 	defer func() {
@@ -172,7 +172,7 @@ func (u Usecases) DeletePhoto(ctx context.Context, req entities.Request) (httpSt
 
 	//general field validation
 	valid := validation.Validation{}
-	valid.Required(req.PhotoId, "photoId")
+	valid.Required(req.SocialId, "socialId")
 
 	if valid.HasErrors() {
 		for _, errValidate := range valid.Errors {
@@ -183,21 +183,17 @@ func (u Usecases) DeletePhoto(ctx context.Context, req entities.Request) (httpSt
 
 	user = middleware.GetAuth(ctx)
 
-	photoPtr, err = u.repo.GetPhotoByIDAndUserID(ctx, user.ID, req.PhotoId)
-	if err != nil || photoPtr == nil {
-		err = errors.New("photo you want to delete is not your photo")
+	socialPtr, err = u.repo.GetSocialByIDAndUserID(ctx, user.ID, req.PhotoId)
+	if err != nil || socialPtr == nil {
+		err = errors.New("social media you want to delete is not your social media")
 		return
 	}
 
-	photo = entities.Photo{
-		ID:        req.PhotoId,
-		Caption:   req.PhotoTitle,
-		PhotoURL:  req.PhotoUrl,
-		CreatedAt: time.Now(),
-		UserID:    user.ID,
+	social = entities.SocialMedia{
+		ID: req.SocialId,
 	}
 
-	err = u.repo.DeletePhoto(ctx, photo.ID)
+	err = u.repo.DeletePhoto(ctx, social.ID)
 
 	return
 }

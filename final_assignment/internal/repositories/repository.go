@@ -39,6 +39,8 @@ type RepositoryImpl interface {
 	GetSocialMediaByID(ctx context.Context, id uint) (*entities.SocialMedia, error)
 	UpdateSocialMedia(ctx context.Context, entry *entities.SocialMedia) error
 	DeleteSocialMedia(ctx context.Context, id uint) error
+	GetSocialByIDAndUserID(ctx context.Context, userId uint, id uint) (*entities.SocialMedia, error)
+	GetSocialByUserID(ctx context.Context, userId uint) (*[]entities.SocialMedia, error)
 }
 
 func NewRepositories(opt options.Options) RepositoryImpl {

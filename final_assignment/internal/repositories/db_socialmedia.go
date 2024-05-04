@@ -51,3 +51,21 @@ func (r Repository) DeleteSocialMedia(ctx context.Context, id uint) error {
 	}
 	return nil
 }
+
+func (r Repository) GetSocialByIDAndUserID(ctx context.Context, userId uint, id uint) (*entities.SocialMedia, error) {
+	var social entities.SocialMedia
+	result := r.DbGorm.First(&social, "user_id=? AND id=?", userId, id)
+	if result.Error != nil {
+		return nil, result.Error
+	}
+	return &social, nil
+}
+
+func (r Repository) GetSocialByUserID(ctx context.Context, userId uint) (*[]entities.SocialMedia, error) {
+	var social []entities.SocialMedia
+	result := r.DbGorm.Find(&social, "user_id=?", userId)
+	if result.Error != nil {
+		return nil, result.Error
+	}
+	return &social, nil
+}
