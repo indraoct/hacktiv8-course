@@ -100,7 +100,7 @@ func (u Usecases) GetSocialById(ctx context.Context, req entities.Request) (soci
 
 	user = middleware.GetAuth(ctx)
 
-	social, err = u.repo.GetSocialByIDAndUserID(ctx, user.ID, req.PhotoId)
+	social, err = u.repo.GetSocialByIDAndUserID(ctx, user.ID, req.SocialId)
 	return
 }
 
@@ -183,7 +183,7 @@ func (u Usecases) DeleteSocial(ctx context.Context, req entities.Request) (httpS
 
 	user = middleware.GetAuth(ctx)
 
-	socialPtr, err = u.repo.GetSocialByIDAndUserID(ctx, user.ID, req.PhotoId)
+	socialPtr, err = u.repo.GetSocialByIDAndUserID(ctx, user.ID, req.SocialId)
 	if err != nil || socialPtr == nil {
 		err = errors.New("social media you want to delete is not your social media")
 		return
@@ -193,7 +193,7 @@ func (u Usecases) DeleteSocial(ctx context.Context, req entities.Request) (httpS
 		ID: req.SocialId,
 	}
 
-	err = u.repo.DeletePhoto(ctx, social.ID)
+	err = u.repo.DeleteSocialMedia(ctx, social.ID)
 
 	return
 }

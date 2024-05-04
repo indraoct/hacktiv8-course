@@ -27,6 +27,12 @@ type UsecaseImpl interface {
 	GetCommentById(ctx context.Context, req entities.Request) (comment *entities.Comment, httpStatus int, err error)
 	UpdateComment(ctx context.Context, req entities.Request) (comment *entities.Comment, httpStatus int, err error)
 	DeleteComment(ctx context.Context, req entities.Request) (httpStatus int, err error)
+
+	CreateSocial(ctx context.Context, req entities.Request) (httpStatus int, err error)
+	GetAllSocial(ctx context.Context) (socials *[]entities.SocialMedia, httpStatus int, err error)
+	GetSocialById(ctx context.Context, req entities.Request) (social *entities.SocialMedia, httpStatus int, err error)
+	UpdateSocial(ctx context.Context, req entities.Request) (social *entities.SocialMedia, httpStatus int, err error)
+	DeleteSocial(ctx context.Context, req entities.Request) (httpStatus int, err error)
 }
 
 func NewUsecase(opt options.Options, repo repositories.RepositoryImpl) UsecaseImpl {

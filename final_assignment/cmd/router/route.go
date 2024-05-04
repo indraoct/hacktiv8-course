@@ -37,5 +37,12 @@ func RegisterRouter(handler handlers.Handler, repo repositories.RepositoryImpl, 
 	muxRouter.HandleFunc("/comment/update/{id}", middleware.HandlerWithMiddleware(handler.UpdateCommentById, tokenAuth.Auth)).Methods(http.MethodPut)
 	muxRouter.HandleFunc("/comment/delete/{id}", middleware.HandlerWithMiddleware(handler.DeleteCommentById, tokenAuth.Auth)).Methods(http.MethodDelete)
 
+	//social
+	muxRouter.HandleFunc("/social/create", middleware.HandlerWithMiddleware(handler.CreateSocial, tokenAuth.Auth)).Methods(http.MethodPost)
+	muxRouter.HandleFunc("/social/get_all", middleware.HandlerWithMiddleware(handler.GetAllSocial, tokenAuth.Auth)).Methods(http.MethodGet)
+	muxRouter.HandleFunc("/social/get/{id}", middleware.HandlerWithMiddleware(handler.GetSocialById, tokenAuth.Auth)).Methods(http.MethodGet)
+	muxRouter.HandleFunc("/social/update/{id}", middleware.HandlerWithMiddleware(handler.UpdateSocialById, tokenAuth.Auth)).Methods(http.MethodPut)
+	muxRouter.HandleFunc("/social/delete/{id}", middleware.HandlerWithMiddleware(handler.DeleteSocialById, tokenAuth.Auth)).Methods(http.MethodDelete)
+
 	return
 }
