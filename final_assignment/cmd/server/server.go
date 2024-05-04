@@ -15,12 +15,12 @@ import (
 )
 
 func StartServer() {
-	//debuging
-	os.Setenv("HACKTIV_DATABASE_STRING", "host=localhost user=indra password=pass1234 dbname=mygram port=5432 sslmode=disable")
-	os.Setenv("HACKTIV_PORT", "8090")
-	os.Setenv("HACKTIV_PRIVATE_KEY", "./assets/keys/private_key.pem")
-	os.Setenv("HACKTIV_PUBLIC_KEY", "./assets/keys/public_key.pem")
-	os.Setenv("HACKTIV_SECRET_KEY", "sfpas")
+	//for debuging:
+	//os.Setenv("HACKTIV_DATABASE_STRING", "host=localhost user=indra password=pass1234 dbname=mygram port=5432 sslmode=disable")
+	//os.Setenv("HACKTIV_PORT", "8090")
+	//os.Setenv("HACKTIV_PRIVATE_KEY", "./assets/keys/private_key.pem")
+	//os.Setenv("HACKTIV_PUBLIC_KEY", "./assets/keys/public_key.pem")
+	//os.Setenv("HACKTIV_SECRET_KEY", "sfpas")
 
 	//get config from environment variable
 	databaseEnv := os.Getenv("HACKTIV_DATABASE_STRING")
