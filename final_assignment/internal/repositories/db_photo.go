@@ -24,6 +24,26 @@ func (r Repository) GetPhotoByID(ctx context.Context, id uint) (*entities.Photo,
 	return &photo, nil
 }
 
+// GetPhotoByID retrieves a photo record from the database by ID
+func (r Repository) GetPhotoByIDAndUserID(ctx context.Context, userId uint, id uint) (*entities.Photo, error) {
+	var photo entities.Photo
+	result := r.DbGorm.First(&photo, "user_id=? AND id=?", userId, id)
+	if result.Error != nil {
+		return nil, result.Error
+	}
+	return &photo, nil
+}
+
+// GetPhotoByID retrieves a photo record from the database by ID
+func (r Repository) GetPhotoByUserID(ctx context.Context, userId uint) (*[]entities.Photo, error) {
+	var photos []entities.Photo
+	result := r.DbGorm.Find(&photos, "user_id=?", userId)
+	if result.Error != nil {
+		return nil, result.Error
+	}
+	return &photos, nil
+}
+
 // UpdatePhoto updates an existing photo record in the database
 func (r Repository) UpdatePhoto(ctx context.Context, photo *entities.Photo) error {
 	result := r.DbGorm.Save(photo)

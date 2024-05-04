@@ -6,11 +6,14 @@ import (
 )
 
 type Request struct {
-	Username string `json:"username,omitempty"`
-	Title    string `json:"title,omitempty"`
-	Email    string `json:"email,omitempty"`
-	Password string `json:"password,omitempty"`
-	Age      int    `json:"age,omitempty"`
+	Username   string `json:"username,omitempty"`
+	Title      string `json:"title,omitempty"`
+	Email      string `json:"email,omitempty"`
+	Password   string `json:"password,omitempty"`
+	Age        int    `json:"age,omitempty"`
+	PhotoId    uint   `json:"photoId"`
+	PhotoTitle string `json:"photoTitle,omitempty"`
+	PhotoUrl   string `json:"photoUrl,omitempty"`
 }
 
 type Response struct {

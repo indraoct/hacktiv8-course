@@ -23,5 +23,12 @@ func RegisterRouter(handler handlers.Handler, repo repositories.RepositoryImpl, 
 	muxRouter.HandleFunc("/register", handler.Register).Methods(http.MethodPost)
 	muxRouter.HandleFunc("/login", handler.Login).Methods(http.MethodPost)
 
+	//photo
+	muxRouter.HandleFunc("/photo/create", middleware.HandlerWithMiddleware(handler.CreatePhoto, tokenAuth.Auth)).Methods(http.MethodPost)
+	muxRouter.HandleFunc("/photo/get_all", middleware.HandlerWithMiddleware(handler.GetAllPhoto, tokenAuth.Auth)).Methods(http.MethodGet)
+	muxRouter.HandleFunc("/photo/get/{id}", middleware.HandlerWithMiddleware(handler.GetPhotoById, tokenAuth.Auth)).Methods(http.MethodGet)
+	muxRouter.HandleFunc("/photo/update/{id}", middleware.HandlerWithMiddleware(handler.UpdatePhotoById, tokenAuth.Auth)).Methods(http.MethodPut)
+	muxRouter.HandleFunc("/photo/delete/{id}", middleware.HandlerWithMiddleware(handler.DeletePhotoById, tokenAuth.Auth)).Methods(http.MethodDelete)
+
 	return
 }

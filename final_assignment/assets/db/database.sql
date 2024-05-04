@@ -11,7 +11,7 @@ CREATE TABLE  "users" (
     );
 
 -- Create Photo table
-CREATE TABLE  photo (
+CREATE TABLE  photos (
     id SERIAL PRIMARY KEY,
     caption TEXT,
     photo_url VARCHAR(255),
@@ -21,18 +21,18 @@ CREATE TABLE  photo (
     );
 
 -- Create Comment table
-CREATE TABLE comment (
+CREATE TABLE comments (
      id SERIAL PRIMARY KEY,
      user_id INTEGER REFERENCES "users"(id),
      comment TEXT,
-     photo_id INTEGER REFERENCES photo(id),
+     photo_id INTEGER REFERENCES photos(id),
      message TEXT,
      created_at TIMESTAMPTZ,
      updated_at TIMESTAMPTZ
 );
 
 -- Create Social Media table
-CREATE TABLE  socialmedia (
+CREATE TABLE  socialmedias (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255),
     social_media_url VARCHAR(255),
@@ -40,18 +40,6 @@ CREATE TABLE  socialmedia (
     created_at TIMESTAMPTZ,
     updated_at TIMESTAMPTZ
     );
-
--- Truncate User table
-TRUNCATE TABLE "users";
-
--- Truncate Photo table
-TRUNCATE TABLE photo;
-
--- Truncate Comment table
-TRUNCATE TABLE comment;
-
--- Truncate Social Media table
-TRUNCATE TABLE socialmedia;
 
 
 
@@ -64,7 +52,7 @@ INSERT INTO "users" (username, title, email, password, age, created_at, updated_
                                                                                        ('user5', 'Title Five', 'user5@example.com', 'password5', 45, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
 -- Insert into Photo table
-INSERT INTO photo (caption, photo_url, user_id, created_at, updated_at) VALUES
+INSERT INTO photos (caption, photo_url, user_id, created_at, updated_at) VALUES
                                                                             ('Caption 1', 'photo_url_1.jpg', 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
                                                                             ('Caption 2', 'photo_url_2.jpg', 2, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
                                                                             ('Caption 3', 'photo_url_3.jpg', 3, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
@@ -72,7 +60,7 @@ INSERT INTO photo (caption, photo_url, user_id, created_at, updated_at) VALUES
                                                                             ('Caption 5', 'photo_url_5.jpg', 5, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
 -- Insert into Comment table
-INSERT INTO comment (user_id, comment, photo_id, message, created_at, updated_at) VALUES
+INSERT INTO comments (user_id, comment, photo_id, message, created_at, updated_at) VALUES
                                                                                       (1, 'Comment 1', 1, 'Message 1', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
                                                                                       (2, 'Comment 2', 2, 'Message 2', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
                                                                                       (3, 'Comment 3', 3, 'Message 3', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
@@ -80,7 +68,7 @@ INSERT INTO comment (user_id, comment, photo_id, message, created_at, updated_at
                                                                                       (5, 'Comment 5', 5, 'Message 5', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
 -- Insert into Social Media table
-INSERT INTO socialmedia (name, social_media_url, user_id, created_at, updated_at) VALUES
+INSERT INTO socialmedias (name, social_media_url, user_id, created_at, updated_at) VALUES
                                                                                       ('User One', 'https://twitter.com/user1', 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
                                                                                       ('User Two', 'https://facebook.com/user2', 2, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
                                                                                       ('User Three', 'https://instagram.com/user3', 3, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),

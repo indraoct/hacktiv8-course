@@ -20,6 +20,8 @@ type RepositoryImpl interface {
 
 	CreatePhoto(ctx context.Context, photo *entities.Photo) error
 	GetPhotoByID(ctx context.Context, id uint) (*entities.Photo, error)
+	GetPhotoByIDAndUserID(ctx context.Context, userId uint, id uint) (*entities.Photo, error)
+	GetPhotoByUserID(ctx context.Context, userId uint) (*[]entities.Photo, error)
 	UpdatePhoto(ctx context.Context, photo *entities.Photo) error
 	DeletePhoto(ctx context.Context, id uint) error
 	GetAllPhotos(ctx context.Context) ([]entities.Photo, error)
